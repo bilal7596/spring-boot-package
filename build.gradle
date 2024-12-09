@@ -1,10 +1,13 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.0'
+	id 'java-library'
+	id 'org.springframework.boot' version '3.4.0' apply(false)
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'maven-publish'
 }
 
-group = 'com.bilal'
+group = 'com.external'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -23,8 +26,32 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+	imports {
+		mavenBom SpringBootPlugin.BOM_COORDINATES
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/bilal7596/spring-boot-package")
+			credentials {
+				username = project.findProperty("user") ?: System.getenv("USERNAME")
+				password = project.findProperty("token") ?: System.getenv("TOKEN")
+			}
+		}
+	}
+	publications {
+		gpr(MavenPublication) {
+			from(components.java)
+		}
+	}
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	api 'org.springframework.boot:spring-boot-starter-web:3.4.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
