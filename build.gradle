@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.external'
-version = '0.0.5-SNAPSHOT'
+version = '0.0.4-SNAPSHOT'
 
 java {
 	toolchain {
@@ -35,19 +35,11 @@ dependencyManagement {
 publishing {
 	repositories {
 		maven {
-			name = "OSSRH"
-			url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-			credentials {
-				username = project.findProperty("OSSRH_USERNAME") ?: System.getenv("USERNAME")
-				password = project.findProperty("OSSRH_TOKEN") ?: System.getenv("TOKEN")
-			}
-		}
-		maven {
 			name = "GitHubPackages"
 			url = uri("https://maven.pkg.github.com/bilal7596/spring-boot-package")
 			credentials {
-				username = project.findProperty("GITHUB_USERNAME") ?: System.getenv("USERNAME")
-				password = project.findProperty("GITHUB_TOKEN") ?: System.getenv("TOKEN")
+				username = project.findProperty("user") ?: System.getenv("USERNAME")
+				password = project.findProperty("token") ?: System.getenv("TOKEN")
 			}
 		}
 	}
