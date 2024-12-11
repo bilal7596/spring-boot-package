@@ -21,7 +21,8 @@ jobs:
         uses: actions/delete-package-versions@v5
         with:
 #          owner: 'bilal7596'
-          package-name: 'spring-boot-package'
+          package-version-ids: 0.0.7
+          package-name: 'com.external.spring-boot-package'
           package-type: 'maven'
-          min-versions-to-keep: 2
+#          min-versions-to-keep: 2
 #          num-old-versions-to-delete: 0
