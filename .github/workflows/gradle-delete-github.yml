@@ -25,3 +25,5 @@ jobs:
           package-type: 'maven'
           min-versions-to-keep: 2
 #          num-old-versions-to-delete: 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
