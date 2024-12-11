@@ -20,8 +20,8 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v5
         with:
-          owner: 'bilal7596'
+#          owner: 'bilal7596'
           package-name: 'spring-boot-package'
           package-type: 'maven'
-          package-version-ids: 0.0.7
+          min-versions-to-keep: 2
 #          num-old-versions-to-delete: 0
