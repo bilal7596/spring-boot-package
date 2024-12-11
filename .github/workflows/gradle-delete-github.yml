@@ -23,5 +23,5 @@ jobs:
           owner: 'bilal7596'
           package-name: 'spring-boot-package'
           package-type: 'maven'
-          package-version-ids: '0.0.7'
+          package-version-ids: 0.0.7
 #          num-old-versions-to-delete: 0
