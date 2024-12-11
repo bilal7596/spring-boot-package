@@ -1,0 +1,27 @@
+name: Delete Gradle Package from Github
+
+on:
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: 'Repository owner (username or org name)'
+        required: true
+      package:
+        description: 'Package name to delete'
+        required: true
+      versions:
+        description: 'Comma-separated list of version IDs to delete'
+        required: true
+
+jobs:
+  delete-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v5
+        with:
+          owner: ${{ github.event.inputs.owner }}
+          package-name: ${{ github.event.inputs.package }}
+          versions: ${{ github.event.inputs.versions }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
