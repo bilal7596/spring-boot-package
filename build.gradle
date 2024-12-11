@@ -50,6 +50,24 @@ publishing {
 	}
 }
 
+//plugins {
+//	id 'com.bilalbasha.springbootpackage' version '9.3.1'
+//}
+//
+//docker {
+//	url = 'unix:///var/run/docker.sock'
+//}
+//
+//task buildDockerImage(type: com.bilalbasha.gradle.docker.tasks.image.DockerBuildImage) {
+//	inputDir.set(file('.'))
+//	tags.add("com.external.spring-boot-package:${project.version}")
+//}
+//
+//task pushDockerImage(type: com.bilalbasha.gradle.docker.tasks.image.DockerPushImage) {
+//	dependsOn buildDockerImage
+//	images.add("com.external.spring-boot-package:${project.version}")
+//}
+
 dependencies {
 	api 'org.springframework.boot:spring-boot-starter-web:3.4.0'
 	compileOnly 'org.projectlombok:lombok'
