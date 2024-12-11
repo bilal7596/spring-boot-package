@@ -20,8 +20,8 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v5
         with:
+          package-version-ids: ${{ github.event.inputs.versions }}
           owner: ${{ github.event.inputs.owner }}
           package-name: ${{ github.event.inputs.package }}
-          versions: ${{ github.event.inputs.versions }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          package-type: maven
+          token: ${{ secrets.GITHUB_TOKEN }}
