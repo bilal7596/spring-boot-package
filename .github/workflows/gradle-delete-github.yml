@@ -16,7 +16,7 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v5
         with:
-          package-version-ids: 39019824
+          package-version-ids: 39037644
           package-name: 'com.external.spring-boot-package'
           package-type: "maven"
           min-versions-to-keep: 2
