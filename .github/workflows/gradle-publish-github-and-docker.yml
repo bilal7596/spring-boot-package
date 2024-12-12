@@ -1,8 +1,11 @@
 name: Gradle Package Publish to both Github and Docker
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      versions:
+        description: 'Comma-separated list of version IDs to delete'
+        required: true
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:

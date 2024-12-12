@@ -7,7 +7,8 @@
 
 name: Gradle Package Publish to Github Registry
 
-#on:
+on:
+  workflow_dispatch:
 #  release:
 #    types: [created]
 

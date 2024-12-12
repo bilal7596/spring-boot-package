@@ -20,7 +20,7 @@ jobs:
           version: "${{ github.event.inputs.version }}"
 
       - name: Print value
-      - run: |
+        run: |
           echo "Input Version: ${{ github.event.inputs.version }}"
           echo "Output Version Id: ${{ steps.version.outputs.ids }}" 
 

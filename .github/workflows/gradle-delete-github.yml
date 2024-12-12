@@ -3,12 +3,6 @@ name: Delete Gradle Package from Github
 on:
   workflow_dispatch:
     inputs:
-#      owner:
-#        description: 'Repository owner (username or org name)'
-#        required: true
-#      package:
-#        description: 'Package name to delete'
-#        required: true
       versions:
         description: 'Comma-separated list of version IDs to delete'
         required: true
@@ -22,10 +16,8 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v5
         with:
-#          owner: 'bilal7596'
           package-name: 'com.external.spring-boot-package'
           package-type: 'maven'
           min-versions-to-keep: 2
-#          num-old-versions-to-delete: 0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
