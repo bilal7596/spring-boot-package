@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Print Github env variables
         run: |
-          echo "Github - ${{ github }}"
-          echo "Env - ${{ env }}"
+          echo "Github - ${{ toJson(github) }}"
+          echo "Env - ${{ toJson(env) }}"
