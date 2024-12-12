@@ -18,7 +18,7 @@ jobs:
         with:
           package-version-ids: 39019824
           package-name: 'com.external.spring-boot-package'
-          package-type: 'maven'
+          package-type: "maven"
           min-versions-to-keep: 2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
