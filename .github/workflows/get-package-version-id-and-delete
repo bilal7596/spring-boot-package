@@ -1,0 +1,31 @@
+name: Delete Gradle Package from Github
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Name'
+        required: true
+
+jobs:
+  delete-package:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Get Package version id
+        uses: castlabs/get-package-version-id-action@v2.0
+        id: version
+        with:
+          version: "${{ github.event.inputs.version }}"
+
+      - name: Print value
+      - run: |
+          echo "Input Version: ${{ github.event.inputs.version }}"
+          echo "Output Version Id: ${{ steps.version.outputs.ids }}" 
+
+      - name: Delete package using version id
+        uses: actions/delete-package-versions@v2
+        if: ${{ steps.version.outputs.ids != '' }}
+        with:
+          package-version-ids: "${{ steps.versions.outputs.ids }}"
