@@ -31,7 +31,7 @@ jobs:
           echo $response
 
           # Parse the latest version ID using jq
-          version_id=$(echo "$response" | jq --arg name "${{ github.event.inputs.package_name }}" '.[] | select(.name == $name) | .id')
+          version_id=$(echo "$response" | jq --arg name "${{ github.event.inputs.version_name }}" '.[] | select(.name == $name) | .id')
 
           echo "Latest Version ID: $version_id"
           echo "version_id=$version_id" >> $GITHUB_ENV
