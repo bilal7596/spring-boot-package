@@ -1,0 +1,14 @@
+name: Debug yaml flow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Github env variables
+        run: |
+          echo "Github - ${{ github }}"
+          echo "Env - ${{ env }}"
