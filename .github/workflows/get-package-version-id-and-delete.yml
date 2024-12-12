@@ -1,4 +1,4 @@
-name: Delete Gradle Package from Github
+name: Get Package Version Id and Delete Gradle Package
 
 on:
   workflow_dispatch:
