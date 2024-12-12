@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,7 +30,6 @@ jobs:
             "https://api.github.com/user/packages/maven/${{ github.event.inputs.package_name }}/versions")
 #           Fetch the package versions using GitHub API and print
           echo $response
-
 #          Parse the response to find the version ID for the specified version name
           parse_response=$(echo "$response" | jq --arg name "1.0.0" '.[] | select(.name == $name)')
 #          version_id=$(echo "$response" | jq --arg name "1.0.0" '.[] | select(.name == $name) | .id')
@@ -37,7 +37,6 @@ jobs:
           version_id=$(echo "$parse_response" | jq '.id')
           meta_data=$(echo "$parse_response" | jq '.metadata')
           package_type=$(echo "$meta_data" | jq '.package_type')
-
           echo "Version ID: $version_id"
           echo "Package Type: $package_type"
           echo "version_id=$version_id" >> $GITHUB_ENV
