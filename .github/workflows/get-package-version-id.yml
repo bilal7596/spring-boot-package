@@ -20,7 +20,7 @@ jobs:
             "https://api.github.com/user/packages/maven/com.external.spring-boot-package/versions")
 
           # Parse the latest version ID using jq
-          version_id=$(echo "$response" | jq '.[0].id')
+          version_id=$(echo "$response" | jq --arg name "0.0.7" '.[] | select(.name == $name) | .id')
 
           echo "Latest Version ID: $version_id"
           echo "version_id=$version_id" >> $GITHUB_ENV
