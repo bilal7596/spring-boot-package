@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.external'
-version = project.findProperty("version")
+version = '0.0.7'
 
 java {
 	toolchain {
