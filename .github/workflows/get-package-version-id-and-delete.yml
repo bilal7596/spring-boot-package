@@ -45,7 +45,7 @@ jobs:
       - name: Print the package version ID
         run: |
           echo "Package Version ID is ${{ env.version_id }}"
-          echo "Package Type is ${{ env.package_type }}
+          echo "Package Type is ${{ env.package_type }}"
 
       - name: Delete package using version id
         uses: actions/delete-package-versions@v5
