@@ -2,6 +2,15 @@ name: Get Package Version ID
 
 on:
   workflow_dispatch:
+    inputs:
+      package_name:
+        description: "Package name"
+        default: "com.external.spring-boot-package"
+        required: true
+      version_name:
+        description: "Version name"
+        default: "1.0.0"
+        required: true
 
 jobs:
   fetch-version-id:
@@ -17,12 +26,12 @@ jobs:
           # Fetch the package versions using GitHub API
           response=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/user/packages/maven/com.external.spring-boot-package/versions")
+            "https://api.github.com/user/packages/maven/${{ github.event.inputs.package_name }}/versions")
           
           echo $response
 
           # Parse the latest version ID using jq
-          version_id=$(echo "$response" | jq --arg name "0.0.7" '.[] | select(.name == $name) | .id')
+          version_id=$(echo "$response" | jq --arg name "${{ github.event.inputs.package_name }}" '.[] | select(.name == $name) | .id')
 
           echo "Latest Version ID: $version_id"
           echo "version_id=$version_id" >> $GITHUB_ENV
