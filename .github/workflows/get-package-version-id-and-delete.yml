@@ -28,27 +28,27 @@ jobs:
           response=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             "https://api.github.com/user/packages/maven/${{ github.event.inputs.package_name }}/versions")
-#           Fetch the package versions using GitHub API and print
-          echo $response
-#          Parse the response to find the version ID for the specified version name
-          parse_response=$(echo "$response" | jq --arg name "1.0.0" '.[] | select(.name == $name)')
-#          version_id=$(echo "$response" | jq --arg name "1.0.0" '.[] | select(.name == $name) | .id')
-#          version_name=$(echo "$parse_response" | jq '.name')
+          
+          # Parse the response to find the version ID for the specified version name
+          parse_response=$(echo "$response" | jq --arg name "${{ github.event.inputs.version_name }}" '.[] | select(.name == $name)')
           version_id=$(echo "$parse_response" | jq '.id')
           meta_data=$(echo "$parse_response" | jq '.metadata')
           package_type=$(echo "$meta_data" | jq '.package_type')
+          
           echo "Version ID: $version_id"
           echo "Package Type: $package_type"
+          
+          # Set environment variables for use in later steps
           echo "version_id=$version_id" >> $GITHUB_ENV
           echo "package_type=$package_type" >> $GITHUB_ENV
 
       - name: Print the package version ID
         run: |
-          echo "Package Version ID is ${{ env.version_id }} and package type is is ${{ env.package_type }}"
+          echo "Package Version ID is ${{ env.version_id }}"
 
       - name: Delete package using version id
         uses: actions/delete-package-versions@v5
-        if: ${{ env.version_id  != '' && env.package_type != '' }}
+        if: ${{ env.version_id != '' && env.package_type != '' }}
         with:
           package-version-ids: "${{ env.version_id }}"
           package-name: com.external.spring-boot-package
