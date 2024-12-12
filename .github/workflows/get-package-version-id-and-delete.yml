@@ -45,11 +45,12 @@ jobs:
       - name: Print the package version ID
         run: |
           echo "Package Version ID is ${{ env.version_id }}"
+          echo "Package Type is ${{ env.$package_type }}
 
       - name: Delete package using version id
         uses: actions/delete-package-versions@v5
         if: ${{ env.version_id != '' && env.package_type != '' }}
         with:
-          package-version-ids: "${{ env.version_id }}"
-          package-name: com.external.spring-boot-package
-          package-type: "${{ env.package_type }}"
+          package-version-ids: ${{ env.version_id }}
+          package-name: ${{ github.event.inputs.package_name }}
+          package-type: ${{ env.package_type }}
