@@ -40,11 +40,11 @@ jobs:
           echo "Version ID: $version_id"
           echo "Package Type: $package_type"
           echo "version_id=$version_id" >> $GITHUB_ENV
-          echo "package_type=package_type" >> $GITHUB_ENV
+          echo "package_type=$package_type" >> $GITHUB_ENV
 
       - name: Print the package version ID
         run: |
-          echo "Package Version ID is ${{ env.version_id }}"
+          echo "Package Version ID is ${{ env.version_id }} and package type is is ${{ env.package_type }}"
 
       - name: Delete package using version id
         uses: actions/delete-package-versions@v5
