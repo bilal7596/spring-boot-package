@@ -33,7 +33,7 @@ jobs:
           parse_response=$(echo "$response" | jq --arg name "${{ github.event.inputs.version_name }}" '.[] | select(.name == $name)')
           version_id=$(echo "$parse_response" | jq '.id')
           meta_data=$(echo "$parse_response" | jq '.metadata')
-          package_type=$(echo "$meta_data" | jq '.package_type')
+          package_type=$(echo "$meta_data" | jq -r '.package_type')
           
           echo "Version ID: $version_id"
           echo "Package Type: $package_type"
