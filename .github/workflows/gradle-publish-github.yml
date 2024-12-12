@@ -37,7 +37,7 @@ jobs:
 
     - name: Set Gradle Version
       run: |
-        ./gradlew properties -Pversion=${{ env.VERSION }}
+        ./gradlew properties -Pversion=${{ github.event.inputs.version_id }}
 
     - name: Build with Gradle
       run: ./gradlew build
